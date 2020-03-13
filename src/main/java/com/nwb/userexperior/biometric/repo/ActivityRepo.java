@@ -21,7 +21,7 @@ public interface ActivityRepo extends JpaRepository<Activity, Long> {
 
     @Query("select a.name as activityName, count(a.name) as occurrences " +
             " from Activity a where a.startTime >= :lastWeekDate " +
-            " group by a.name ")
+            " group by a.name order by occurrences desc ")
     List<WeeklyActivityOccurencesReportProjection> groupByActOccurrences(@Temporal(value = TemporalType.DATE)
                                                                          @Param(value = "lastWeekDate") Date lastWeekDate);
 
